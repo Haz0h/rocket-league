@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>haz0 | Rocket League Legacy</title>
+    
+    <!-- Rocket League Logo as Favicon -->
+    <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd_aaOo1Uq8Cu9YPmDrMrSAU18PSd7ho7ycA&s" type="image/jpeg">
+
+    <style>
+        :root {
+            --primary: #1e90ff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: "Segoe UI", system-ui, Arial, sans-serif;
+            background: radial-gradient(circle at top, #101735, #05070f 70%);
+            color: #eaeaf0;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Loading Screen */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, #1e90ff, #5f2cff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease;
+        }
+        #loader.hidden { opacity: 0; visibility: hidden; }
+
+        .loading-text {
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            color: white;
+            animation: pulse 1.8s infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55)), 
+                        url('https://britishesports.org/wp-content/uploads/2022/04/rl-terms-1200x800-1.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 2;
+        }
+        .hero-content h1 {
+            font-size: 4.2rem;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+        }
+        .hero-content p {
+            font-size: 1.35rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: white;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+        }
+        .btn {
+            padding: 14px 30px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            border-radius: 10px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .btn:hover { transform: translateY(-4px); }
+
+        .btn-primary { background: linear-gradient(135deg, #00b4ff, #0077ff); }
+        .btn-green   { background: linear-gradient(135deg, #00ffa3, #00c97f); }
+        .btn-discord { background: linear-gradient(135deg, #5865F2, #404EED); }
+        .btn-twitch  { background: linear-gradient(135deg, #9146FF, #6d28ff); }
+        .btn-back    { background: linear-gradient(135deg, #ff4757, #ff6b6b); }
+
+        /* Navigation */
+        nav {
+            background: rgba(5, 7, 15, 0.97);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            font-size: 1.1rem;
+        }
+        .nav-link {
+            padding: 22px 0;
+            color: #ddd;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        section {
+            padding-top: 120px;
+            margin-top: -80px;
+        }
+
+        .card {
+            background: linear-gradient(180deg, #141b3a, #0e132b);
+            border-radius: 16px;
+            padding: 55px 50px;
+            margin-bottom: 90px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            line-height: 1.85;
+        }
+
+        h2 {
+            color: #4da3ff;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .back-to-top {
+            display: block;
+            margin-top: 40px;
+            text-align: center;
+            color: #aaa;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+        .back-to-top:hover {
+            color: var(--primary);
+        }
+
+        footer {
+            background-color: #05070f;
+            text-align: center;
+            padding: 70px 20px 50px;
+            color: #9aa0c0;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loader">
+        <div class="loading-text">LOADING LEGACY...</div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Welcome to My Rocket League Legacy</h1>
+            <p>This page represents years of grind, passion, and dedication.</p>
+            
+            <div class="buttons">
+                <a href="#journey" class="btn btn-primary">My Journey</a>
+                <a href="#history" class="btn btn-green">History</a>
+                <a href="#whatis" class="btn btn-green">What is Rocket League?</a>
+                <a href="#community" class="btn btn-discord">Community</a>
+                <a href="#future" class="btn btn-green">Why It Matters</a>
+                <a href="https://www.twitch.tv/haz0h" target="_blank" class="btn btn-twitch">Watch on Twitch</a>
+                <a href="index.html" class="btn btn-back">⬅ Back to My Main Website</a>
+            </div>
+        </div>
+    </section>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#journey" class="nav-link">My Journey</a>
+            <a href="#history" class="nav-link">History</a>
+            <a href="#whatis" class="nav-link">What is Rocket League?</a>
+            <a href="#community" class="nav-link">Community</a>
+            <a href="#future" class="nav-link">Why It Matters</a>
+        </div>
+    </nav>
+
+    <main>
+        <section id="journey">
+            <div class="card">
+                <h2>My Rocket League Journey</h2>
+                <p>Rocket League wasn’t just a game — it was a journey of personal growth. From my first awkward kickoffs to mastering advanced mechanics, every match taught me patience, discipline, and real improvement.</p>
+                <p><strong>Career Snapshot:</strong></p>
+                <ul style="margin-left: 25px; font-size: 1.1rem; line-height: 1.9;">
+                    <li><strong>Current Rank:</strong> Super Sonic Legend</li>
+                    <li><strong>Years Active:</strong> 2015 – 2026</li>
+                    <li><strong>Experience:</strong> Ranked • Scrims • Community Tournaments</li>
+                </ul>
+                <a href="#" class="back-to-top">↑ Back to Top</a>
+            </div>
+        </section>
+
+        <section id="history">
+            <div class="card">
+                <h2>History of Rocket League</h2>
+                <p><strong>Released:</strong> July 7, 2015 by Psyonix.</p>
+                <p>Originally planned as a sequel to an earlier game, Rocket League quickly became a global phenomenon and one of the biggest esports titles.</p>
+                
+                <p><strong>First Major Updates:</strong> Early updates added new game modes, arenas, and ranked seasons. The Rocket Pass system (introduced in 2018) significantly increased long-term player engagement.</p>
+                
+                <p><strong>Player Numbers:</strong></p>
+                <ul style="margin-left: 25px; font-size: 1.1rem; line-height: 1.9;">
+                    <li>Over <strong>90 million registered players</strong> worldwide at its peak</li>
+                    <li>Millions of concurrent players across all platforms</li>
+                    <li>Still maintains a strong player base in 2026</li>
+                </ul>
+
+                <p>Rocket League started as a small indie title and grew into a global esport with massive tournaments and a passionate community.</p>
+                
+                <a href="#" class="back-to-top">↑ Back to Top</a>
+            </div>
+        </section>
+
+        <section id="whatis">
+            <div class="card">
+                <h2>What is Rocket League?</h2>
+                <p>Rocket League is a fast-paced game that combines soccer with rocket-powered cars. You score goals by hitting a giant ball with your car.</p>
+                <p>It may look simple, but it has incredible depth — flying, boosting, aerial shots, and endless skill expression.</p>
+                <p><strong>The best part?</strong> The game is completely free to play on Steam, Epic Games, PlayStation, and Xbox.</p>
+                <a href="#" class="back-to-top">↑ Back to Top</a>
+            </div>
+        </section>
+
+        <section id="community">
+            <div class="card">
+                <h2>More Than Just a Game</h2>
+                <p>Rocket League has brought people together for years. Teammates become friends, and late-night queues turn into great memories.</p>
+                <a href="#" class="back-to-top">↑ Back to Top</a>
+            </div>
+        </section>
+
+        <section id="future">
+            <div class="card">
+                <h2>Why Rocket League Matters</h2>
+                <p>In a world full of trends, Rocket League stands for pure skill, creativity, and dedication. As long as people keep grinding and improving, this game deserves to live on.</p>
+                
+                <div class="buttons" style="margin-top: 35px; justify-content: center;">
+                    <button onclick="showDiscord()" class="btn btn-discord">Add Me on Discord</button>
+                    <a href="https://discord.gg/rocketleague" target="_blank" class="btn btn-primary">Official RL Discord</a>
+                    <a href="https://www.twitch.tv/haz0h" target="_blank" class="btn btn-twitch">🎥 Watch My Streams</a>
+                </div>
+                <a href="#" class="back-to-top">↑ Back to Top</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Created with passion by <strong>haz0</strong> — For the grind, the memories, and the game that changed everything 🏎️⚽</p>
+    </footer>
+
+    <script>
+        window.addEventListener("load", () => {
+            setTimeout(() => {
+                document.getElementById("loader").classList.add("hidden");
+            }, 800);
+        });
+
+        function showDiscord() {
+            alert("My Discord: .haz0.");
+        }
+    </script>
+</body>
+</html>
